@@ -34,14 +34,9 @@ variable "memory" {
   type        = string
 }
 
-variable "disk_size" {
-  description = "disk size in gb"
-  type        = string
-}
-
-variable "disk_storage" {
-  description = "storage of new vm disk"
-  type        = string
+variable "disks" {
+  description = "list of vm disks"
+  type        = list(any)
 }
 
 variable "network_bridge_interface" {

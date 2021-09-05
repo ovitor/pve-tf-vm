@@ -18,11 +18,13 @@ resource "proxmox_vm_qemu" "service" {
   memory  = var.memory
   scsihw  = "virtio-scsi-pci"
 
-  # TODO add more network device with loop
-  disk {
-    size    = var.disk_size
-    type    = "scsi"
-    storage = var.disk_storage
+  dynamic "disk" {
+    for_each = var.disks
+    content {
+      size    = lookup(disk.value, "disk_size", "10G")
+      storage = lookup(disk.value, "disk_storage", "local")
+      type    = lookup(disk.value, "disk_type", "scsi")
+    }
   }
 
   # TODO add more network device with loop
