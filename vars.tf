@@ -39,15 +39,9 @@ variable "disks" {
   type        = list(any)
 }
 
-variable "network_bridge_interface" {
-  description = "network bridge interface"
-  type        = string
-}
-
-variable "network_vlan_tag" {
-  description = "network vlan tag"
-  type        = string
-  default     = null
+variable "networks" {
+  description = "list of vm network interfaces"
+  type        = list(any)
 }
 
 variable "ipv4_cidr" {

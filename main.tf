@@ -27,11 +27,13 @@ resource "proxmox_vm_qemu" "service" {
     }
   }
 
-  # TODO add more network device with loop
-  network {
-    model  = "virtio"
-    bridge = var.network_bridge_interface
-    tag    = var.network_vlan_tag
+  dynamic "network" {
+    for_each = var.networks
+    content {
+      model  = "virtio"
+      bridge = lookup(network.value, "network_bridge", "vmbr0")
+      tag    = lookup(network.value, "network_tag", null)
+    }
   }
 
   # cloud init stuff
@@ -39,8 +41,9 @@ resource "proxmox_vm_qemu" "service" {
   cipassword   = var.default_password
   searchdomain = var.searchdomain
   nameserver   = var.nameserver
-  ipconfig0    = join(",", compact(local.ipconfig0))
-  sshkeys      = file(var.devops_keys)
+
+  ipconfig0 = join(",", compact(local.ipconfig0))
+  sshkeys   = file(var.devops_keys)
 
   connection {
     type     = "ssh"
