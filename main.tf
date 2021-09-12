@@ -10,11 +10,11 @@ resource "proxmox_vm_qemu" "service" {
   clone       = var.template_name
   agent       = 1
 
-  os_type = "cloud-init"
+  os_type = var.os_type
   cores   = var.cores
   sockets = var.sockets
-  vcpus   = "0"
-  cpu     = "host"
+  vcpus   = var.vcpus
+  cpu     = var.cpu
   memory  = var.memory
   scsihw  = "virtio-scsi-pci"
 

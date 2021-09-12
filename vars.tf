@@ -19,6 +19,24 @@ variable "template_name" {
   type        = string
 }
 
+variable "os_type" {
+  description = "os type, ubuntu/centos/cloud-init"
+  type        = string
+  default     = "cloud-init"
+}
+
+variable "vcpus" {
+  description = "virtual cpus"
+  type        = string
+  default     = "0"
+}
+
+variable "cpu" {
+  description = "cpu to emulate in the guest"
+  type        = string
+  default     = "host"
+}
+
 variable "cores" {
   description = "number of cores"
   type        = string
