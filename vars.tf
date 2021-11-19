@@ -77,7 +77,7 @@ variable "ipv4_gw" {
 variable "default_user" {
   description = "default user name"
   type        = string
-  default     = "ubuntu"
+  default     = ""
 }
 
 variable "default_password" {

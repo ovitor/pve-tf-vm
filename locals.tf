@@ -6,4 +6,6 @@ locals {
   is_dhcp = var.ipv4_cidr != null ? false : true
 
   host_ip = var.ipv4_cidr != null ? split("/", var.ipv4_cidr)[0] : "self.ssh_host"
+
+  default_username = split("-", var.template_name)[0]
 }

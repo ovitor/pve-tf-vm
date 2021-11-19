@@ -1,9 +1,9 @@
 resource "proxmox_vm_qemu" "service" {
   name = format("%s", var.service_name)
   desc = templatefile("${path.module}/templates/desc.tpl", {
-    service_name = var.service_name
-    service_desc = var.service_desc
-    default_user = var.default_user
+    service_name     = var.service_name
+    service_desc     = var.service_desc
+    default_username = local.default_username
   })
 
   target_node = var.target_node
@@ -37,7 +37,7 @@ resource "proxmox_vm_qemu" "service" {
   }
 
   # cloud init stuff
-  ciuser       = var.default_user
+  ciuser       = local.default_username
   cipassword   = var.default_password
   searchdomain = var.searchdomain
   nameserver   = var.nameserver
@@ -48,7 +48,7 @@ resource "proxmox_vm_qemu" "service" {
   connection {
     type     = "ssh"
     host     = local.host_ip
-    user     = var.default_user
+    user     = local.default_username
     password = var.default_password
     # host     = split("/", var.ipv4_cidr)[0]
   }

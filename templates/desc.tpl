@@ -1,3 +1,3 @@
 ${service_desc} (${service_name})
 
-user: ${default_user}
+default user: ${default_username}
