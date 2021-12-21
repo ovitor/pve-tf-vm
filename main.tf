@@ -8,7 +8,7 @@ resource "proxmox_vm_qemu" "service" {
 
   target_node = var.target_node
   clone       = var.template_name
-  agent       = 1
+  agent       = var.agent
 
   os_type = var.os_type
   cores   = var.cores

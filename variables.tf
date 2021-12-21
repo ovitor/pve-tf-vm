@@ -62,6 +62,13 @@ variable "networks" {
   type        = list(any)
 }
 
+variable "agent" {
+  description = "set qemu_guest_agent"
+  type        = number
+  default     = 0
+
+}
+
 variable "ipv4_cidr" {
   description = "service's ipv4 in cidr format"
   type        = string
