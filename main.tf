@@ -45,13 +45,13 @@ resource "proxmox_vm_qemu" "service" {
   ipconfig0 = join(",", compact(local.ipconfig0))
   sshkeys   = file(var.devops_keys)
 
-  connection {
-    type     = "ssh"
-    host     = local.host_ip
-    user     = local.default_username
-    password = var.default_password
-    # host     = split("/", var.ipv4_cidr)[0]
-  }
+  #connection {
+  #  type     = "ssh"
+  #  host     = local.host_ip
+  #  user     = local.default_username
+  #  password = var.default_password
+  #  host     = split("/", var.ipv4_cidr)[0]
+  #}
 
   lifecycle {
     ignore_changes = [
@@ -60,11 +60,11 @@ resource "proxmox_vm_qemu" "service" {
     ]
   }
 
-  provisioner "remote-exec" {
-    inline = [
-      "sudo systemctl start qemu-guest-agent",
-      "sudo systemctl enable qemu-guest-agent"
-    ]
-  }
+  #  provisioner "remote-exec" {
+  #  inline = [
+  #    "sudo systemctl start qemu-guest-agent",
+  #    "sudo systemctl enable qemu-guest-agent"
+  #  ]
+  #}
 
 }
