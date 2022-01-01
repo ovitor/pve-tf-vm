@@ -65,7 +65,7 @@ variable "networks" {
 variable "agent" {
   description = "set qemu_guest_agent"
   type        = number
-  default     = 0
+  default     = 1
 
 }
 
