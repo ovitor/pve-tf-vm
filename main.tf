@@ -43,7 +43,7 @@ resource "proxmox_vm_qemu" "service" {
   nameserver   = var.nameserver
 
   ipconfig0 = join(",", compact(local.ipconfig0))
-  sshkeys   = file(var.devops_keys)
+  sshkeys   = var.devops_keys
 
   #connection {
   #  type     = "ssh"
