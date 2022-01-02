@@ -104,6 +104,6 @@ variable "nameserver" {
 }
 
 variable "devops_keys" {
-  description = "file with a list of ssh public keys (one per line)"
+  description = "content of ssh public keys (one per line)"
   type        = string
 }
