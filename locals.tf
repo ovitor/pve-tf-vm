@@ -1,11 +1,9 @@
 locals {
-  ipconfig0 = [
-    var.ipv4_cidr != null ? "ip=${var.ipv4_cidr}" : "ip=dhcp",
-    var.ipv4_gw != null ? "gw=${var.ipv4_gw}" : ""
-  ]
-  is_dhcp = var.ipv4_cidr != null ? false : true
-
-  host_ip = var.ipv4_cidr != null ? split("/", var.ipv4_cidr)[0] : "self.ssh_host"
-
-  default_username = split("-", var.template_name)[0]
+  ips = flatten([
+    for instance in var.instances : {
+      for network in instance.networks : "ipconfig${index(instance.networks, network)}" =>
+      network.ip == "dhcp" ? "ip=dhcp" : format("ip=%s,gw=%s", network.ip, network.gw)
+    }
+  ])
+  host_ip = local.ips[0]["ipconfig0"] == "ip=dhcp" ? "self.ssh_host" : trimprefix(split("/", local.ips[0]["ipconfig0"])[0], "ip=")
 }
