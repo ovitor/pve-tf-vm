@@ -50,7 +50,6 @@ resource "proxmox_vm_qemu" "service" {
   ipconfig4 = lookup(local.ips[0], "ipconfig4", null)
   ipconfig5 = lookup(local.ips[0], "ipconfig5", null)
 
-
   connection {
     type     = "ssh"
     host     = local.host_ip
