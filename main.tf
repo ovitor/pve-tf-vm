@@ -1,6 +1,6 @@
 resource "proxmox_vm_qemu" "service" {
   for_each = var.instances
-  name     = "${environment}-${each.key}"
+  name     = "${each.value.environment}-${each.key}"
 
   desc = templatefile("${path.module}/templates/desc.tpl", {
     service_name     = each.key
