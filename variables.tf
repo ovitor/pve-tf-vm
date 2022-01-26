@@ -3,7 +3,6 @@ variable "instances" {
   type = map(object({
     name          = string
     description   = string
-    environment   = string
     target_node   = string
     template_name = string
     username      = string
