@@ -1,13 +1,7 @@
 resource "proxmox_vm_qemu" "service" {
   for_each = var.instances
-  name     = replace("${each.value.environment}-${each.key}", "prod-", "")
-
-  desc = templatefile("${path.module}/templates/desc.tpl", {
-    service_name     = each.key
-    service_desc     = each.value.description
-    environment      = each.value.environment
-    default_username = each.value.username
-  })
+  name     = each.value.name
+  desc     = each.value.description
 
   target_node = each.value.target_node
   clone       = each.value.template_name
