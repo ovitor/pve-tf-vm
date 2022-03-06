@@ -37,12 +37,12 @@ resource "proxmox_vm_qemu" "service" {
   searchdomain = each.value.searchdomain
   nameserver   = each.value.nameserver
 
-  ipconfig0 = lookup(local.ips[0], "ipconfig0", null)
-  ipconfig1 = lookup(local.ips[0], "ipconfig1", null)
-  ipconfig2 = lookup(local.ips[0], "ipconfig2", null)
-  ipconfig3 = lookup(local.ips[0], "ipconfig3", null)
-  ipconfig4 = lookup(local.ips[0], "ipconfig4", null)
-  ipconfig5 = lookup(local.ips[0], "ipconfig5", null)
+  ipconfig0 = lookup(local.ips[index(keys(var.instances), each.key)], "ipconfig0", null)
+  ipconfig1 = lookup(local.ips[index(keys(var.instances), each.key)], "ipconfig1", null)
+  ipconfig2 = lookup(local.ips[index(keys(var.instances), each.key)], "ipconfig2", null)
+  ipconfig3 = lookup(local.ips[index(keys(var.instances), each.key)], "ipconfig3", null)
+  ipconfig4 = lookup(local.ips[index(keys(var.instances), each.key)], "ipconfig4", null)
+  ipconfig5 = lookup(local.ips[index(keys(var.instances), each.key)], "ipconfig5", null)
 
   connection {
     type     = "ssh"
