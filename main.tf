@@ -32,6 +32,7 @@ resource "proxmox_vm_qemu" "service" {
   }
 
   # cloud init stuff
+  cicustom     = "user=local:snippets/user_data_${each.key}.yaml"
   ciuser       = each.value.username
   cipassword   = each.value.password
   searchdomain = each.value.searchdomain
@@ -50,8 +51,6 @@ resource "proxmox_vm_qemu" "service" {
     user     = each.value.username
     password = each.value.password
   }
-
-  sshkeys = var.authorized_keys
 
   lifecycle {
     ignore_changes = [
