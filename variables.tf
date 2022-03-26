@@ -16,8 +16,3 @@ variable "instances" {
     nameserver    = string
   }))
 }
-
-variable "authorized_keys" {
-  description = "authorized user's keys"
-  type        = string
-}
